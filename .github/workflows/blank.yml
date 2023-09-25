@@ -16,4 +16,5 @@ jobs:
         AWS_SECRET_ACCESS_KEY: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
         AWS_DEFAULT_REGION: "us-west-2"
       run: |
+          aws --endpoint-url=http://localhost:4566 secretsmanager create-secret --name testSecret --secret-string 'secret'
           aws --endpoint-url=http://aws:4566 secretsmanager list-secrets > $HOME/test.txt
