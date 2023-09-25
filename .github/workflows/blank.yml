@@ -1,0 +1,19 @@
+name: secret
+on: [workflow_dispatch]
+
+jobs:
+  aws:
+    name: Deploy S3
+    runs-on: infra-deploymentbox
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Deploy S3
+      env:
+        AWS_ACCESS_KEY_ID: "AKIAIOSFODNN7EXAMPLE"
+        AWS_SECRET_ACCESS_KEY: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+        AWS_DEFAULT_REGION: "us-west-2"
+      run: |
+          aws --endpoint-url=http://aws:4566 secretsmanager get-secret-value --secret-id test > $HOME/test.txt
